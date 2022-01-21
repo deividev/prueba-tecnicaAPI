@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    container_name: newspaper-mongoDB
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: newspaper
+    ports:
+      - '27017:27017'
+
+  mongoviewer:
+    image: mongo-express
+    container_name: newspaper-mongoDB-viewer
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_BASICAUTH_USERNAME: ''
+      ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+      ME_CONFIG_MONGODB_AUTH_USERNAME: admin
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+    ports:
+      - '8081:8081'
+    restart: always    
+    links:
+      - mongo
+    depends_on:
+      - mongo
