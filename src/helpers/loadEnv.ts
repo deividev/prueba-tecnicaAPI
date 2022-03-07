@@ -2,7 +2,7 @@ import path from 'path';
 import { config } from 'dotenv';
 
 export const loadEnv = () => {
-  const envPath = path.join(__dirname, '../..', '.env');
+  const envPath = path.join(__dirname, '../..', 'loca.env');
 
   const result = config({ path: envPath });
 
